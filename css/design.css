@@ -5,8 +5,22 @@ body{
     background-position: center;
     height: 100vh;
     width: auto;
+    animation: change 60s infinite ease-in-out;
 }
-
+@keyframes change {
+    33%
+    {
+        background-image: url("../img/greenpond.png");
+    }
+    66%
+    {
+        background-image: url("../img/sunflower.png");
+    }
+   100%
+    {
+        background-image: url("../img/forest.png");
+    }
+}
 .container{
     position: absolute;
     height: 28pc;
