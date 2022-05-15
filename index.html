@@ -65,6 +65,11 @@ function strike(index) {
   } else {
     elements[index] = "<strike>" + elements[index] + "</strike>";
   }
+  if (localStorage.getItem("elements") == null) {
+      localStorage.setItem("elements", JSON.stringify(elements));
+  } else {
+      localStorage.setItem("elements", JSON.stringify(elements));
+  }
   display();
 }
 
