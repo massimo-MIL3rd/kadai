@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ChatApp</title>
+<link rel="stylesheet" href="css/design.css">
+</head>
+<body>
+
+<!-- コンテンツ表示画面  -->
+
+<div class="container">
+    <div>
+        <input type="text" id="uname" placeholder="name">
+    </div>
+    <div id="output"></div>
+    <div>
+        <button id="refresh"><img src="./img/refresh.png"></button>
+    </div>
+    <div>
+        <textarea name="" id="text" placeholder="text" cols="30" rows="5"></textarea>
+        <button id="send"><img src="./img/send.png"></button>
+    </div>
+</div>
+
+<!--/ コンテンツ表示画面 -->
+
+
+
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- JQuery -->
+
+
+<!--** 以下Firebase **-->
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+    import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved }
+        from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.8.1/firebase-database.min.js";
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyC0y4zxX3dAR1KixS2Xy_AReYRwQfEcbfk",
+      authDomain: "fir-demo-a11ac.firebaseapp.com",
+      databaseURL: "https://fir-demo-a11ac-default-rtdb.firebaseio.com",
+      projectId: "fir-demo-a11ac",
+      storageBucket: "fir-demo-a11ac.appspot.com",
+      messagingSenderId: "181169335960",
+      appId: "1:181169335960:web:4f01fe0125f1b04112eaed"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    const db = getDatabase(app); // RealtimeDBに接続
+    const dbRef = ref(db, "chat"); // RealtimeDB内の"chat"を使う
+
+    document.getElementById("refresh").addEventListener("click", function () {  
+        checkDelete();
+    })
+    
+function checkDelete(){
+     var result = confirm('do you want to refresh?');
+     if(result == true){
+        remove(dbRef);
+        location.reload();
+     }else{
+        return false;
+     }
+  }
+    $("#send").on("click", function () {
+        const msg = {
+            uname: $("#uname").val(),
+            text: $("#text").val()
+        }
+        const newPostRef = push(dbRef); // pushできる状態にする
+        set(newPostRef, msg); // DBに値を送信
+    });
+
+    onChildAdded(dbRef, function(data){
+        const msg = data.val();
+        const key = data.key;
+        const h = `<p>${msg.uname}: ${msg.text}</p>`;
+        $('#output').append(h);
+    });
+
+    $('#text').on('keydown', function(e){
+        if(e.keyCode === 13) {
+            const msg = {
+                uname: $('#uname').val(),
+                text: $('#text').val()
+            }
+            const newPostRef = push(dbRef);
+            set(newPostRef, msg);
+        }
+    });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
