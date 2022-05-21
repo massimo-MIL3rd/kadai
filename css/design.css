@@ -24,7 +24,7 @@ body{
 }
 .container{
     position: absolute;
-    height: 60pc;
+    height: 100vh;
     width: 30pc;
     margin: auto;
     top: 0;
@@ -37,9 +37,9 @@ body{
     position: absolute;
     background-color: #fff;
     height: 50px;
-    width: 70%;
+    width: 67%;
     margin: auto;
-    top: 40px;
+    top: 15px;
     right: 0;
     left: 0;
     outline: none;
@@ -53,10 +53,10 @@ body{
     position: absolute;
     background-color: #fff;
     overflow: auto;
-    height: 70%;
+    height: 60%;
     width: 70%;
     margin: auto;
-    top: 125px;
+    top: 75px;
     right: 0;
     left: 0;
     outline: none;
@@ -75,7 +75,7 @@ body{
     margin: auto;
     right: 0;
     left: 0;
-    bottom: 50px;
+    bottom: 15px;
     outline: none;
     border: none;
     border-radius: 5px;
@@ -88,7 +88,7 @@ body{
     position: absolute;
     background: transparent;
     margin: auto;
-    bottom: 170px;
+    bottom: 105px;
     right: 65px;
     border: none;
     cursor: pointer;
@@ -99,8 +99,9 @@ body{
     background: transparent;
     border: none;
     margin: auto;
-    bottom: 40px;
+    bottom: 15px;
     right: 65px;
+    cursor: pointer;
 }
 
 footer {
